@@ -16,26 +16,31 @@ let newItems = [];
 let workItems =[];
 
 app.get("/",(req,res)=>{
-
     //res.render("list", {kindOfday: globalDateDayYear(), EJSnewItem: newItems}); // <input type="text" name="newItem">
-    res.render("list",{listTitle: currentDayStr(),EJSnewItem: newItems});
+    res.render("list",{listTitle: currentDayStr(),newListItems: newItems});
         //res.write("<h1>NO weekend</h1>");
-        //res.send("No Weekend");
         //res.sendFile(__dirname + "/index.html");
         //res.send(today);
 });
 
 
 app.get("/work",(req,res)=>{
-    res.render("list",{listTitle:"work list", newListItems: workItems});
+    res.render("list",{listTitle:"Work list", newListItems: workItems});
 });
 
 
 app.post("/",(req,res)=>{
     
     const newItem = req.body.newItem;
-    newItems.push(newItem);
-    res.redirect('/');
+   
+    if (req.body.list === "Work list") {
+        workItems.push(newItem);
+        res.redirect("/work")
+    } else {
+        newItems.push(newItem);
+        res.redirect('/');
+    }
+
 });
 
 
@@ -44,6 +49,10 @@ app.post("/work",(req,res)=>{
     const newItem =  req.body.newItem;
     workItems.push(newItem);
     res.redirect("/work");
+});
+
+app.get("/about",(req,res)=>{
+    res.render("about");
 });
 
 function globalDateDayYear() {
@@ -64,4 +73,7 @@ function currentDayStr() {
     let weekdays = ["monday","tuesday","wednesday","thurday","friday","saturday","sunday"];
     return day = weekdays[today.getDay()-1];
 }
+
+
+
 
