@@ -1,5 +1,8 @@
 const express =  require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date.js");
+
+
 
 const port = 4500 || process.env.port;
 
@@ -16,8 +19,9 @@ let newItems = [];
 let workItems =[];
 
 app.get("/",(req,res)=>{
+  
     //res.render("list", {kindOfday: globalDateDayYear(), EJSnewItem: newItems}); // <input type="text" name="newItem">
-    res.render("list",{listTitle: currentDayStr(),newListItems: newItems});
+    res.render("list",{listTitle: date.globalDateDayYear(),newListItems: newItems});
         //res.write("<h1>NO weekend</h1>");
         //res.sendFile(__dirname + "/index.html");
         //res.send(today);
@@ -55,24 +59,6 @@ app.get("/about",(req,res)=>{
     res.render("about");
 });
 
-function globalDateDayYear() {
-
-    var options = {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    };
-
-    let today = new Date(); // Sat Apr 11 2020 14:43:05 GMT+0200 (Central European Summer Time)
-    return Myday = today.toLocaleDateString("en-US",options);
-}
-
-function currentDayStr() {
-
-    let today = new Date();
-    let weekdays = ["monday","tuesday","wednesday","thurday","friday","saturday","sunday"];
-    return day = weekdays[today.getDay()-1];
-}
 
 
 
