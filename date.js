@@ -2,33 +2,31 @@
 //jshint esversion:6
 
 
-module.exports.currentDayStr = currentDayStr;
 
-module.exports.globalDateDayYear = globalDateDayYear;
-
-
-
- function globalDateDayYear() {
+exports.globalDateDayYear = ()=> {
     
-
-    var options = {
+    const options = {
         weekday: "long",
         day: "numeric",
         month: "long"
     };
 
-    let today = new Date(); // Sat Apr 11 2020 14:43:05 GMT+0200 (Central European Summer Time)
-    return Myday = today.toLocaleDateString("en-US",options);
+    const today = new Date(); // Sat Apr 11 2020 14:43:05 GMT+0200 (Central European Summer Time)
+    return today.toLocaleDateString("en-US",options);
 }
 
- function currentDayStr() {
 
-    let today = new Date();
+exports.currentDayStr = ()=> {
 
-    const weekdays = ["monday","tuesday","wednesday","thurday","friday","saturday","sunday"];
-    return day = weekdays[today.getDay()];
+    const today = new Date();
+    const options = {
+        weekday: "long"
+    }
+    return today.toLocaleDateString("en-us",options);
     
 }
+
+
 
 
 console.log(module.exports);
